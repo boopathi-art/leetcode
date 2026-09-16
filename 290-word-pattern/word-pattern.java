@@ -7,20 +7,26 @@ class Solution {
             return false;
         }
 
+        String[] map = new String[26];
+
         for (int i = 0; i < pattern.length(); i++) {
 
-            for (int j = 0; j < i; j++) {
+            int index = pattern.charAt(i) - 'a';
 
-                if (pattern.charAt(i) == pattern.charAt(j)) {
-                    if (!words[i].equals(words[j])) {
+            if (map[index] == null) {
+
+                for (int j = 0; j < 26; j++) {
+                    if (map[j] != null && map[j].equals(words[i])) {
                         return false;
                     }
                 }
 
-                if (words[i].equals(words[j])) {
-                    if (pattern.charAt(i) != pattern.charAt(j)) {
-                        return false;
-                    }
+                map[index] = words[i];
+
+            } else {
+
+                if (!map[index].equals(words[i])) {
+                    return false;
                 }
             }
         }
